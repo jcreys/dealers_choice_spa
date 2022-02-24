@@ -13,6 +13,7 @@ const Artist = sequelize.define('artist', {
     }
 });
 //ph2 create a GET routes
+app.use('/src', express.static(path.join(__dirname, 'src')));
 app.get('/',(req,res,next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/artists', async(req,res,next)=>{
