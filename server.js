@@ -4,14 +4,17 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/dealers_choice_spa'); //set up sequelize instance
 const STRING = Sequelize.DataTypes.STRING;
 const express = require('express');
+const res = require('express/lib/response');
 const app = new express();
-
+const path = require('path');
 const Artist = sequelize.define('artist', {
     name: {
         type: STRING,
     }
 });
 //ph2 create a GET routes
+app.get('/',(req,res,next)=> res.sendFile(path.join(__dirname, 'index.html')));
+
 app.get('/api/artists', async(req,res,next)=>{
     try{
         res.send(await Artist.findAll());
